@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=development
+      - FLASK_HOST=0.0.0.0
+      - FLASK_PORT=5005
+      - FLASK_APP=entrypoints/flask_app.py
+      - FLASK_DEBUG=1
+    volumes:
+      - ./src:/src
+      - ./tests:/tests
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+      - --port=5005
+    ports:
+      - 5005:5005
